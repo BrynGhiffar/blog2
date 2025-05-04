@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+@theme {
+    --font-inter: 'Inter', 'sans-serif';
+    --font-merriweather: 'Merriweather', serif;
+}
+
+.bullet::before {
+    --radius: 8px;
+    content: '';
+    top: calc(50% - var(--radius) / 2);
+    left: -33px;
+    display: block;
+    position: absolute;
+    height: var(--radius);
+    width: var(--radius);
+    background-color: white;
+    border-radius: 50%;
+}

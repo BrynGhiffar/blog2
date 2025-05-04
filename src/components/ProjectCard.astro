@@ -1,0 +1,52 @@
+---
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+import TechStack from "./TechStack";
+import { FaGithub } from "react-icons/fa";
+import { CgMediaLive } from "react-icons/cg";
+
+interface Props {
+  image: ImageMetadata;
+  imageAlt: string;
+  name: string;
+  tech?: string[];
+  githubLink?: string;
+  liveLink?: string;
+}
+
+const { image, imageAlt, name, tech, githubLink, liveLink } = Astro.props;
+---
+
+<div>
+  <div class="p-3 rounded-md flex flex-col gap-1 overflow-hidden">
+    <a target="_blank" href={liveLink}>
+      <Image src={image} alt={imageAlt} class="rounded-md" />
+    </a>
+    <h4 class="text-3xl font-bold font-inter">{name}</h4>
+    <TechStack tech={tech} />
+    <div class="flex flex-wrap gap-1">
+      {
+        githubLink && (
+          <a
+            target="_blank"
+            href={githubLink}
+            class="hover:bg-white hover:text-black transition-all ease-in-out pointer p-1 rounded-md flex gap-1 font-inter"
+          >
+            <FaGithub size={24} /> GitHub
+          </a>
+        )
+      }
+      {
+        liveLink && (
+          <a
+            target="_blank"
+            href={liveLink}
+            class="hover:bg-white transition-all ease-in-out pointer p-1 rounded-md flex font-bold font-inter gap-1 text-red-600"
+          >
+            <CgMediaLive size={24} /> LIVE
+          </a>
+        )
+      }
+    </div>
+  </div>
+</div>

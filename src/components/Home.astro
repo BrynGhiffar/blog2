@@ -1,0 +1,237 @@
+---
+import ExperienceItem from "./ExperienceItem";
+import InktorImage from "@/assets/inktor-portofolio2.png";
+import MinilinksImage from "@/assets/minilinks_showcase.webp";
+import ChatbyteImage from "@/assets/chatbyte_app.webp";
+import { FaGithub, FaLinkedin, FaFileDownload } from "react-icons/fa";
+import ProjectCard from "@/components/ProjectCard.astro";
+import TechStack from "@/components/TechStack";
+---
+
+<script>
+  const getElementBeforePosition = (elem: HTMLElement) => {
+    const rect = elem.getBoundingClientRect();
+    const beforeStyle = window.getComputedStyle(elem, "::before");
+    const beforeTop = rect.top + parseInt(beforeStyle.top || "0");
+    const beforeLeft = rect.left + parseInt(beforeStyle.left || "0");
+    const beforeHeight = parseInt(beforeStyle.height || "0");
+    const beforeWidth = parseInt(beforeStyle.width || "0");
+
+    return {
+      x: beforeLeft + beforeWidth / 2,
+      y: beforeTop + beforeHeight / 2,
+    };
+  };
+
+  const adjustTimelineLine = () => {
+    const yScroll = window.scrollY || window.pageYOffset;
+    const bullets = document.getElementsByClassName("bullet");
+    const firstBullet = bullets[0] as HTMLElement;
+    const firstPosition = getElementBeforePosition(firstBullet);
+    const lastBullet = bullets[bullets.length - 1] as HTMLElement;
+    const lastPosition = getElementBeforePosition(lastBullet);
+    const height = Math.abs(firstPosition.y - lastPosition.y);
+    const bulletLine = document.getElementsByClassName(
+      "bullet-line"
+    )[0] as HTMLElement;
+    Object.assign(bulletLine.style, {
+      top: `${yScroll + firstPosition.y}px`,
+      left: `${firstPosition.x}px`,
+      height: `${height}px`,
+    });
+  };
+
+  adjustTimelineLine();
+
+  const experiencesList = document.querySelector("#experiences") as HTMLElement;
+
+  const resizeObserver = new ResizeObserver((entries) => {
+    adjustTimelineLine();
+  });
+
+  resizeObserver.observe(experiencesList);
+</script>
+
+<div class="flex flex-col gap-0.5">
+  <h1 class="text-5xl font-bold">Bryn Ghiffar</h1>
+  <h2 class="text-2xl italic">Software Engineer</h2>
+  <div class="flex gap-2">
+    <a
+      target="_blank"
+      href="https://github.com/BrynGhiffar"
+      class="hover:bg-white hover:text-black transition-all ease-in-out pointer p-1 rounded-md"
+    >
+      <FaGithub size={32} />
+    </a>
+    <a
+      target="_blank"
+      href="https://www.linkedin.com/in/brynghiffar/"
+      class="hover:bg-white hover:text-black transition-all ease-in-out pointer p-1 rounded-md"
+    >
+      <FaLinkedin size={32} />
+    </a>
+    <a
+      target="_blank"
+      href="/resume.pdf"
+      class="hover:bg-white hover:text-black transition-all ease-in-out pointer p-1 rounded-md flex items-center font-inter gap-1 text-lg font-bold"
+    >
+      <FaFileDownload size={28} className="inline" /> CV
+    </a>
+  </div>
+</div>
+<div class="flex flex-col gap-1">
+  <h3 class="text-3xl font-bold pb-2">Experience</h3>
+  <hr class="pb-5" />
+  <div class="bullet-line absolute border-l-[1px]"></div>
+  <ul class="px-7 grid gap-2 ease-in-out transition-all" id="experiences">
+    <ExperienceItem
+      name="Bitwyre"
+      duration="May 2024 - now"
+      shortSummary="Crypto Exchange Startup"
+      tech={["rust", "c++", "python", "mysql"]}
+      client:load
+    >
+      <ul class="list-disc list-inside">
+        <li>
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deleniti,
+          beatae.
+        </li>
+        <li>
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Atque,
+          magni.
+        </li>
+        <li>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus,
+          magnam?
+        </li>
+      </ul>
+    </ExperienceItem>
+    <ExperienceItem
+      name="Geodwipa Teknika Nusantara"
+      duration="(9 mo) April 2023 - Dec 2023"
+      shortSummary="Oil & Gas Company Consultant"
+      tech={[
+        "nextjs",
+        "typescript",
+        "python",
+        "golang",
+        "rabbitmq",
+        "postgres",
+      ]}
+      client:load
+    >
+      <ul class="list-disc list-inside">
+        <li>
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deleniti,
+          beatae.
+        </li>
+        <li>
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Atque,
+          magni.
+        </li>
+        <li>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus,
+          magnam?
+        </li>
+      </ul>
+    </ExperienceItem>
+    <ExperienceItem
+      name="Akseleran"
+      duration="(7 mo) Feb 2023 - Aug 2023"
+      shortSummary="P2P Lending Startup"
+      tech={["swift"]}
+      client:load
+    >
+      <ul class="list-disc list-inside">
+        <li>
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deleniti,
+          beatae.
+        </li>
+        <li>
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Atque,
+          magni.
+        </li>
+        <li>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus,
+          magnam?
+        </li>
+      </ul>
+    </ExperienceItem>
+    <ExperienceItem
+      name="Pegipegi"
+      duration="(12 mo) Feb 2022 - Jan 2023"
+      shortSummary="Online Travel Agent Startup"
+      tech={["java", "spring", "mongodb"]}
+      client:load
+    >
+      <ul class="list-disc list-inside">
+        <li>
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deleniti,
+          beatae.
+        </li>
+        <li>
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Atque,
+          magni.
+        </li>
+        <li>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus,
+          magnam?
+        </li>
+      </ul>
+    </ExperienceItem>
+  </ul>
+</div>
+<div class="flex flex-col gap-0.5">
+  <h3 class="text-3xl font-bold pb-2">Personal Projects</h3>
+  <hr class="pb-5" />
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+    <ProjectCard
+      image={InktorImage}
+      imageAlt="image of inktor"
+      name="Inktor"
+      tech={["rust", "react", "typescript", "wasm", "webrtc"]}
+      githubLink="https://github.com/BrynGhiffar/inktor-fe"
+      liveLink="https://inktor.bghiffar.com"
+    />
+    <ProjectCard
+      image={ChatbyteImage}
+      imageAlt="image of chatbyte"
+      name="ChatByte"
+      tech={["rust", "react", "typescript"]}
+      githubLink="https://github.com/BrynGhiffar/chatbyte-fe"
+      liveLink="https://chatbyte.bghiffar.com"
+    />
+    <ProjectCard
+      image={MinilinksImage}
+      imageAlt="image of minilinks"
+      name="Minilinks"
+      tech={["golang", "react", "typescript"]}
+      githubLink="https://github.com/BrynGhiffar/urlshortener-be"
+      liveLink="https://minilinks.bghiffar.com"
+    />
+  </div>
+</div>
+<div class="flex flex-col gap-0.5">
+  <h3 class="text-3xl font-bold pb-2">Blogs</h3>
+  <hr class="pb-5" />
+  <div class="flex flex-col gap-2">
+    <a
+      href="/"
+      class="group p-1 px-2 rounded-md hover:bg-white hover:text-black cursor-pointer ease-in-out transition-all"
+    >
+      <h4 class="text-2xl font-bold">Rust Tutorial</h4>
+      <p class="text-sm pb-3">2024-09-09</p>
+      <TechStack tech={["rust"]} />
+      <p>A rust tutorial</p>
+    </a>
+    <a
+      href="/"
+      class="group p-1 px-2 rounded-md hover:bg-white hover:text-black cursor-pointer ease-in-out transition-all"
+    >
+      <h4 class="text-2xl font-bold">Rust Tutorial</h4>
+      <p class="text-sm pb-3">2024-09-09</p>
+      <TechStack tech={["rust"]} />
+      <p>A rust tutorial</p>
+    </a>
+  </div>
+</div>
