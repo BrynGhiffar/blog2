@@ -27,7 +27,7 @@ const { blog } = Astro.props;
         <span class="block text-white">
           {moment(blog.data.date).format("DD/MM/YYYY")}
         </span>
-        <div class="text-md md:text-lg text-white mt-10 font-sans">
+        <div class="text-md md:text-lg text-white mt-10 font-merriweather">
           <ReactMarkdown content={blog.body}/>
         </div>
       </div>

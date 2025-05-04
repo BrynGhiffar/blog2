@@ -1,5 +1,7 @@
 ---
 import Logo from "@/assets/bgamma.svg";
+import SpeedInsights from "@vercel/speed-insights/astro";
+import Analytics from "@vercel/analytics/astro";
 ---
 
 <!doctype html>
@@ -19,6 +21,8 @@ import Logo from "@/assets/bgamma.svg";
     <meta name="generator" content={Astro.generator} />
     <title>bghiffar.com</title>
   </head>
+  <SpeedInsights/>
+  <Analytics/>
   <body>
     <div
       class="bg-black min-h-screen text-white px-5 md:px-10 xl:px-96 py-20 font-merriweather flex flex-col gap-3"
