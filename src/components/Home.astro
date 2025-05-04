@@ -6,6 +6,18 @@ import ChatbyteImage from "@/assets/chatbyte_app.webp";
 import { FaGithub, FaLinkedin, FaFileDownload } from "react-icons/fa";
 import ProjectCard from "@/components/ProjectCard.astro";
 import TechStack from "@/components/TechStack";
+import { getCollection } from 'astro:content';
+import moment from "moment";
+
+const blogs = (await getCollection('blogs')).sort((a, b) => {
+	if (a.data.date > b.data.date) {
+		return -1
+	} else if (a.data.date < b.data.date) {
+		return 1;
+	} else {
+		return 0;
+	}
+});
 ---
 
 <script>
@@ -215,23 +227,18 @@ import TechStack from "@/components/TechStack";
   <h3 class="text-3xl font-bold pb-2">Blogs</h3>
   <hr class="pb-5" />
   <div class="flex flex-col gap-2">
-    <a
-      href="/"
-      class="group p-1 px-2 rounded-md hover:bg-white hover:text-black cursor-pointer ease-in-out transition-all"
-    >
-      <h4 class="text-2xl font-bold">Rust Tutorial</h4>
-      <p class="text-sm pb-3">2024-09-09</p>
-      <TechStack tech={["rust"]} />
-      <p>A rust tutorial</p>
-    </a>
-    <a
-      href="/"
-      class="group p-1 px-2 rounded-md hover:bg-white hover:text-black cursor-pointer ease-in-out transition-all"
-    >
-      <h4 class="text-2xl font-bold">Rust Tutorial</h4>
-      <p class="text-sm pb-3">2024-09-09</p>
-      <TechStack tech={["rust"]} />
-      <p>A rust tutorial</p>
-    </a>
+    {
+      blogs.map((blog) => (
+        <a
+          href={`/blog/${blog.id}`}
+          class="group p-1 px-2 rounded-md hover:bg-white hover:text-black cursor-pointer ease-in-out transition-all"
+        >
+          <h4 class="text-2xl font-bold">{blog.data.title}</h4>
+          <p class="text-sm pb-3">{moment(blog.data.date).format("DD-MM-YYYY")}</p>
+          <TechStack tech={blog.data.tech} />
+          <p>{blog.data.description}</p>
+        </a>
+      ))
+    }
   </div>
 </div>

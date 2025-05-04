@@ -1,0 +1,34 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import moment from 'moment';
+import { ReactMarkdown } from '@/components/markdown/ReactMarkdown';
+import { FaArrowLeftLong } from "react-icons/fa6";
+import '@/styles/global.css'
+
+export async function getStaticPaths() {
+    const blogs = await getCollection('blogs');
+    return blogs.map(blog => ({
+        params: { id: blog.id },
+        props: { blog }
+    }))
+}
+
+const { blog } = Astro.props;
+---
+
+<Layout>
+    <div>
+
+        <a href="/" class="p-1 rounded-md hover:bg-white hover:text-black transition-all ease-in-out font-bold text-lg inline-flex items-center gap-1"> <FaArrowLeftLong className="inline"/> Back</a>
+        <h1 class="pt-2 text-purple2 text-3xl 2xl:text-5xl font-extrabold">
+          {blog.data.title}
+        </h1>
+        <span class="block text-white">
+          {moment(blog.data.date).format("DD/MM/YYYY")}
+        </span>
+        <div class="text-md md:text-lg text-white mt-10 font-sans">
+          <ReactMarkdown content={blog.body}/>
+        </div>
+      </div>
+</Layout>
