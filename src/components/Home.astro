@@ -3,7 +3,7 @@ import ExperienceItem from "./ExperienceItem";
 import InktorImage from "@/assets/inktor-portofolio2.png";
 import MinilinksImage from "@/assets/minilinks_showcase.webp";
 import ChatbyteImage from "@/assets/chatbyte_app.webp";
-import { FaGithub, FaLinkedin, FaFileDownload } from "react-icons/fa";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 import ProjectCard from "@/components/ProjectCard.astro";
 import TechStack from "@/components/TechStack";
 import { getCollection } from 'astro:content';
@@ -97,9 +97,26 @@ const blogs = (await getCollection('blogs')).sort((a, b) => {
   <div class="bullet-line absolute border-l-[1px]"></div>
   <ul class="px-7 grid gap-2 ease-in-out transition-all" id="experiences">
     <ExperienceItem
+      name="Traveloka"
+      duration="June 2025 - now"
+      shortSummary="Online Travel"
+      tech={["java", "spring", "postgres"]}
+      client:load
+    >
+      As a <span class="underline-offset-2 underline">Backend Engineer</span> in Traveloka's booking team, I have:
+      <ul class="list-disc pl-7">
+        <li>
+          Implemented read write splitting on our booking service, reducing AWS bill's for the database instance by 5%, and reduced load on primary database by more than 50%.
+        </li>
+        <li>
+          Participated in on-call rotation, this involves investigating and resolving production issues, often communicating and coordinating with multiple stakeholders, for quick resolution.
+        </li>
+      </ul>
+    </ExperienceItem>
+    <ExperienceItem
       name="Bitwyre"
-      duration="May 2024 - now"
-      shortSummary="Crypto Exchange Startup"
+      duration="(1 yr 1 mo) May 2024 - May 2025"
+      shortSummary="Crypto Exchange"
       tech={["rust", "c++", "python", "mysql"]}
       client:load
     >
@@ -114,9 +131,9 @@ const blogs = (await getCollection('blogs')).sort((a, b) => {
       </ul>
     </ExperienceItem>
     <ExperienceItem
-      name="Geodwipa Teknika Nusantara"
+      name="Geodwipa"
       duration="(9 mo) April 2023 - Dec 2023"
-      shortSummary="Oil & Gas Company Consultant"
+      shortSummary="Oil & Gas Consultancy"
       tech={[
         "nextjs",
         "typescript",
@@ -143,7 +160,7 @@ const blogs = (await getCollection('blogs')).sort((a, b) => {
     <ExperienceItem
       name="Akseleran"
       duration="(7 mo) Feb 2023 - Aug 2023"
-      shortSummary="P2P Lending Startup"
+      shortSummary="P2P Lending"
       tech={["swift"]}
       client:load
     >
@@ -162,8 +179,8 @@ const blogs = (await getCollection('blogs')).sort((a, b) => {
     </ExperienceItem>
     <ExperienceItem
       name="Pegipegi"
-      duration="(12 mo) Feb 2022 - Jan 2023"
-      shortSummary="Online Travel Agent Startup"
+      duration="(1 yr) Feb 2022 - Jan 2023"
+      shortSummary="Online Travel"
       tech={["java", "spring", "mongodb"]}
       client:load
     >

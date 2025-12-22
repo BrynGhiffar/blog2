@@ -3,8 +3,8 @@ import Layout from '@/layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 import moment from 'moment';
 import { ReactMarkdown } from '@/components/markdown/ReactMarkdown';
-import { FaArrowLeftLong } from "react-icons/fa6";
 import '@/styles/global.css'
+import { FaArrowLeft } from 'react-icons/fa';
 
 export async function getStaticPaths() {
     const blogs = await getCollection('blogs');
@@ -20,7 +20,7 @@ const { blog } = Astro.props;
 <Layout>
     <div>
 
-        <a href="/" class="p-1 rounded-md hover:bg-white hover:text-black transition-all ease-in-out font-bold text-lg inline-flex items-center gap-1"> <FaArrowLeftLong className="inline"/> Back</a>
+        <a href="/" class="p-1 rounded-md hover:bg-white hover:text-black transition-all ease-in-out font-bold text-lg inline-flex items-center gap-1"> <FaArrowLeft className="inline"/> Back</a>
         <h1 class="pt-2 text-purple2 text-3xl 2xl:text-5xl font-extrabold">
           {blog.data.title}
         </h1>
